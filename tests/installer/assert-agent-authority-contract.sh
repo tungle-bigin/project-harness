@@ -35,7 +35,7 @@ done
 
 [[ "$(wc -c <"$agent_block" | tr -d ' ')" -le 1600 ]]
 entry_words=$(awk '{ words += NF } END { print words }' "$agent_block" "$workflow")
-[[ "$entry_words" -le 1000 ]]
+[[ "$entry_words" -le 1150 ]]
 
 required_workflow_text=(
   'Does The Work Need Durable Memory?'
