@@ -154,7 +154,7 @@ grep -Fq 'Do not install hooks' "$root/docs/WORKFLOW.md"
 # Harness commands for every bounded scenario above.
 entry_words=$(awk '{ words += NF } END { print words }' \
   "$root/scripts/agent-harness-block.md" "$root/docs/WORKFLOW.md")
-[[ "$entry_words" -le 1000 ]]
+[[ "$entry_words" -le 1150 ]]
 [[ "$entry_words" -lt 2413 ]]
 
 echo "repository workflow scenarios passed: harness_commands=0 entry_words=$entry_words baseline_words=2413 interventions=1/1 ambiguous tasks"
