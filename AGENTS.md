@@ -8,7 +8,8 @@ Read `docs/WORKFLOW.md` and only relevant product, design, plan, code, and
 validation material.
 
 - Answers, explanations, reviews, diagnoses, plans, and status reports are
-  read-only. Inspect only what is needed; change nothing.
+  read-only. Inspect only what is needed; change nothing, except writing
+  report files to `reports/` when a review, audit, or report asks for one.
 - For a bounded change, inspect affected behavior and proof, implement, and
   validate. No control-plane operation is required.
 - Use one `docs/plans/active/` file when work spans sessions, coordinates

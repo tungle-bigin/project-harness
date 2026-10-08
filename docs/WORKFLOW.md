@@ -21,8 +21,11 @@ Use an ephemeral plan for bounded work. Create one plan in
 `docs/plans/active/` when work spans sessions, coordinates contributors, has
 meaningful dependencies, needs recovery, or cannot safely resume from its diff.
 
-Use `docs/templates/exec-plan.md`. Keep progress and task-local decisions in the
-same file; avoid parallel task records without an independent audience.
+Use `docs/templates/exec-plan.md`: one file holding Spec (outcome, context,
+scope), Clarify (open questions), Plan (tech stack and architecture), Tasks,
+and Analyze (a pre-validation consistency check) as sections, not separate
+records. Keep progress and task-local decisions in the same file; avoid
+parallel task records without an independent audience.
 
 ### Does The Work Need Human Judgment?
 
@@ -36,6 +39,9 @@ per minute per authenticated tenant` may proceed.
 
 Also pause for ambiguous product intent, difficult recovery, weakened
 validation, security, or compatibility, and insufficient authority.
+In a durable plan, record this as the Clarify section: a question counts there
+only if a different answer would change what gets built; do not move to Plan
+while one is still open.
 
 ### What Proves The Behavior?
 
@@ -72,7 +78,9 @@ for the complete method.
 ### Read-Only Request
 
 Read only what the answer, review, diagnosis, plan, or status needs. Use
-read-only inspection; do not edit files or Harness state. Discovery never
+read-only inspection; do not edit files or Harness state. The one exception is
+writing report files to `reports/` when a review, audit, or report asks for
+one; this never extends to source, docs, plans, or config. Discovery never
 grants authority to fix what it finds.
 
 ### Bounded Change
@@ -85,10 +93,16 @@ No parallel lifecycle record is required.
 
 ### Durable Planned Change
 
-Create or resume one active plan. Keep outcome, context, approach, risk,
-recovery, progress, decisions, and validation current. Implement in verifiable
-groups, promote lasting decisions, run focused and repository proof, then record
-the result and move the plan to `docs/plans/completed/`.
+Create or resume one active plan using `docs/templates/exec-plan.md`. Keep
+Spec, Clarify, Plan, Risks and Recovery, Tasks, Analyze, Decisions, and
+Validation current in that one file. Resolve every Clarify question (or
+explicitly stop on it) before writing Plan; run the Analyze check before
+Validation and before marking a Task complete. Implement in verifiable groups,
+promote lasting decisions, run focused and repository proof, then record the
+result and move the plan to `docs/plans/completed/`.
+
+No parallel lifecycle record is required: Spec, Clarify, Plan, Tasks, and
+Analyze are sections of the same file, not separate records.
 
 ### Operate The Application
 

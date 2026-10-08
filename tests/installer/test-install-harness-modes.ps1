@@ -162,6 +162,32 @@ try {
     & $Installer -Directory $Dry -Yes -DryRun | Out-Null
     if (Test-Path $Dry) { throw "dry-run wrote target" }
 
+    # Claude shim creates, appends to, refreshes, and skips CLAUDE.md with backups.
+    $ClaudeFresh = Join-Path $Temp "claude-fresh"
+    Invoke-Install $ClaudeFresh @("Claude")
+    $ClaudeFreshText = Get-Content -Raw (Join-Path $ClaudeFresh "CLAUDE.md")
+    if (!$ClaudeFreshText.StartsWith("# Project Rules") -or !$ClaudeFreshText.Contains("@AGENTS.md")) { throw "claude shim not created" }
+    $ClaudeFreshHash = (Get-FileHash -Algorithm SHA256 (Join-Path $ClaudeFresh "CLAUDE.md")).Hash
+    Invoke-Install $ClaudeFresh @("Merge", "Claude")
+    if ((Get-FileHash -Algorithm SHA256 (Join-Path $ClaudeFresh "CLAUDE.md")).Hash -ne $ClaudeFreshHash) { throw "current claude block was rewritten" }
+
+    $ClaudeLocal = Join-Path $Temp "claude-local"
+    New-Item -ItemType Directory -Force $ClaudeLocal | Out-Null
+    "# Local Claude Rules`n`nKeep this Claude-only rule.`n" | Set-Content (Join-Path $ClaudeLocal "CLAUDE.md")
+    $ClaudeLocalHash = (Get-FileHash -Algorithm SHA256 (Join-Path $ClaudeLocal "CLAUDE.md")).Hash
+    Invoke-Install $ClaudeLocal @("Claude")
+    $ClaudeLocalText = Get-Content -Raw (Join-Path $ClaudeLocal "CLAUDE.md")
+    if (!$ClaudeLocalText.Contains("Keep this Claude-only rule.") -or !$ClaudeLocalText.Contains("@AGENTS.md")) { throw "claude append failed" }
+    $ClaudeBackup = Get-ChildItem (Join-Path $ClaudeLocal ".harness-backup") -Recurse -Filter "CLAUDE.md" -File | Select-Object -First 1
+    if (!$ClaudeBackup -or (Get-FileHash -Algorithm SHA256 $ClaudeBackup.FullName).Hash -ne $ClaudeLocalHash) { throw "claude backup does not match prior CLAUDE.md" }
+
+    $ClaudeStale = Join-Path $Temp "claude-stale"
+    New-Item -ItemType Directory -Force $ClaudeStale | Out-Null
+    "local rule`n`n<!-- HARNESS:BEGIN -->`nstale`n<!-- HARNESS:END -->`n" | Set-Content (Join-Path $ClaudeStale "CLAUDE.md")
+    Invoke-Install $ClaudeStale @("Claude")
+    $ClaudeStaleText = Get-Content -Raw (Join-Path $ClaudeStale "CLAUDE.md")
+    if (!$ClaudeStaleText.Contains("local rule") -or $ClaudeStaleText.Contains("stale") -or !$ClaudeStaleText.Contains("@AGENTS.md")) { throw "claude refresh failed" }
+
     # Removed protocol-v1 parameters fail during binding.
     Assert-RejectedParameter "WithCli" $true
     Assert-RejectedParameter "UpgradeCli" $true
