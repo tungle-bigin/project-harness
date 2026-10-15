@@ -105,6 +105,11 @@ impl CoreDistributionPort for EmbeddedCoreDistribution {
         )?;
         add(
             &mut files,
+            "docs/patterns/document-lifecycle.md",
+            include_bytes!("../../../../docs/patterns/document-lifecycle.md"),
+        )?;
+        add(
+            &mut files,
             "docs/product/README.md",
             include_bytes!("../../../../docs/product/README.md"),
         )?;
@@ -147,6 +152,21 @@ impl CoreDistributionPort for EmbeddedCoreDistribution {
             &mut files,
             "docs/templates/harness-improvement.md",
             include_bytes!("../../../../docs/templates/harness-improvement.md"),
+        )?;
+        add(
+            &mut files,
+            "docs/templates/split-plan/spec.md",
+            include_bytes!("../../../../docs/templates/split-plan/spec.md"),
+        )?;
+        add(
+            &mut files,
+            "docs/templates/split-plan/design.md",
+            include_bytes!("../../../../docs/templates/split-plan/design.md"),
+        )?;
+        add(
+            &mut files,
+            "docs/templates/split-plan/tasks.md",
+            include_bytes!("../../../../docs/templates/split-plan/tasks.md"),
         )?;
         Ok(CoreDistribution {
             version: env!("CARGO_PKG_VERSION").to_owned(),

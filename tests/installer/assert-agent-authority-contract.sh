@@ -50,6 +50,8 @@ required_workflow_text=(
   'Operate The Application'
   'Improve The Harness'
   'No parallel lifecycle record is required.'
+  'Either shape is one plan.'
+  'docs/templates/split-plan/'
 )
 for text in "${required_workflow_text[@]}"; do
   grep -Fq "$text" "$workflow"
@@ -75,6 +77,7 @@ payloads=(
   docs/WORKFLOW.md
   docs/README.md
   docs/patterns/encoding-invariants.md
+  docs/patterns/document-lifecycle.md
   docs/product/README.md
   docs/plans/README.md
   docs/plans/active/README.md
@@ -84,6 +87,9 @@ payloads=(
   docs/templates/decision.md
   docs/templates/exec-plan.md
   docs/templates/harness-improvement.md
+  docs/templates/split-plan/spec.md
+  docs/templates/split-plan/design.md
+  docs/templates/split-plan/tasks.md
 )
 for payload in "${payloads[@]}"; do
   grep -Fxq "$payload" "$root/scripts/harness-install-files.txt"

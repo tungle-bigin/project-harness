@@ -2,19 +2,21 @@
 
 Plans are Git-native working memory for complex tasks.
 
-Use an ephemeral plan for bounded, single-session work. Create one file under
+Use an ephemeral plan for bounded, single-session work. Create one plan under
 `active/` when work spans sessions, coordinates contributors, has meaningful
 dependencies, needs recovery, or cannot safely resume from its diff.
 
 ```text
-docs/plans/active/<slug>.md
+docs/plans/active/YYYY-MM-DD-<slug>.md   (default: one file)
+docs/plans/active/YYYY-MM-DD-<slug>/     (split: spec.md, design.md, tasks.md)
   -> keep progress, decisions, recovery, and validation current
-  -> record the verified result
-  -> move to docs/plans/completed/<slug>.md
+  -> promote lasting behavior and choices, record the verified result
+  -> move to docs/plans/completed/
 ```
 
-Use `docs/templates/exec-plan.md`. Do not split one task into story, design,
-trace, and validation records without an independent audience.
+Use `docs/templates/exec-plan.md`. Use `docs/templates/split-plan/` only under
+the conditions in the [document lifecycle](../patterns/document-lifecycle.md).
+Either shape is one plan; do not add trace or status records beside it.
 
 ## Active
 

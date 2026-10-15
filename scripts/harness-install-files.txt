@@ -17,6 +17,7 @@ AGENTS.md
 docs/WORKFLOW.md
 docs/README.md
 docs/patterns/encoding-invariants.md
+docs/patterns/document-lifecycle.md
 docs/product/README.md
 docs/plans/README.md
 docs/plans/active/README.md
@@ -26,3 +27,6 @@ docs/templates/application-runbook.md
 docs/templates/decision.md
 docs/templates/exec-plan.md
 docs/templates/harness-improvement.md
+docs/templates/split-plan/spec.md
+docs/templates/split-plan/design.md
+docs/templates/split-plan/tasks.md

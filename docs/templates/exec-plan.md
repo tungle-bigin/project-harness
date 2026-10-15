@@ -1,6 +1,7 @@
 # Execution Plan: Title
 
 Date: YYYY-MM-DD
+Depends on: none | YYYY-MM-DD-<slug>
 
 ## Status
 
@@ -24,6 +25,13 @@ Out of scope:
 
 - Item.
 
+## Clarify
+
+A question belongs here only if a different answer changes what gets built.
+Resolve or stop on each one before writing Approach.
+
+- None open.
+
 ## Approach
 
 Describe the smallest coherent sequence. Update this section when evidence
@@ -44,6 +52,14 @@ changes the approach.
 
 Promote lasting product or architecture decisions into `docs/decisions/`.
 
+## Analyze
+
+Before Validation and before marking a step complete, check that Outcome,
+Scope, Approach, and Progress agree. Record each mismatch and how it was
+resolved.
+
+- Result:
+
 ## Validation
 
 - Focused proof:
@@ -54,3 +70,6 @@ Promote lasting product or architecture decisions into `docs/decisions/`.
 
 Complete after implementation. Record the verified outcome, limitations, and
 follow-up before moving the plan to `docs/plans/completed/`.
+
+- Promoted to Truth documents:
+- Promoted to decisions:

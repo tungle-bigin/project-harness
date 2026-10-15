@@ -11,12 +11,16 @@ Start with the smallest authoritative surface.
 - `HARNESS.md`: product principles and installed-core model.
 - `product/`: current product behavior and installation contract.
 - `decisions/`: lasting choices future work must inherit.
-- `plans/`: one durable working-memory document for work that needs it.
+- `plans/`: one durable working-memory plan, a file or a split directory, for
+  work that needs it.
+- [`patterns/document-lifecycle.md`](patterns/document-lifecycle.md): which
+  documents track code (truth), stay frozen (record), or stay current while
+  active (working), and when to split a plan.
 - [`patterns/encoding-invariants.md`](patterns/encoding-invariants.md): turn
   accepted architecture, reliability, security, and quality rules into native
   mechanical validation.
-- `templates/`: optional decision, plan, runbook, and Harness-improvement
-  structures.
+- `templates/`: optional decision, plan, split-plan, runbook, and
+  Harness-improvement structures.
 
 ## Consumer-Owned Truth
 
