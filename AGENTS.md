@@ -12,7 +12,7 @@ material.
   report asks for.
 - For a bounded change, inspect affected behavior and proof, implement, and
   validate. No control-plane operation is required.
-- Use one `docs/plans/active/` file when work spans sessions, has
+- Use one `docs/plans/active/` plan when work spans sessions, has
   contributors or dependencies, or needs recovery. Move it to
   `docs/plans/completed/` only after validation.
 - Before editing, identify repository authority for each new externally

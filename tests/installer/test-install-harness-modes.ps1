@@ -38,6 +38,15 @@ try {
     if (!(Test-Path (Join-Path $Fresh ".harness-core/manifest.json"))) { throw "core provenance missing" }
     if (!(Test-Path (Join-Path $Fresh "docs/WORKFLOW.md"))) { throw "core workflow missing" }
     if (!(Test-Path (Join-Path $Fresh "docs/patterns/encoding-invariants.md"))) { throw "invariant pattern missing" }
+    if (!(Test-Path (Join-Path $Fresh "docs/patterns/document-lifecycle.md"))) { throw "document lifecycle pattern missing" }
+    foreach ($Part in @("spec", "design", "tasks")) {
+        if (!(Test-Path (Join-Path $Fresh "docs/templates/split-plan/$Part.md"))) { throw "split-plan $Part template missing" }
+    }
+    if (Test-Path (Join-Path $Fresh "docs/templates/high-risk-story")) { throw "replaced high-risk-story templates installed" }
+    $FreshLifecycle = Get-Content -Raw (Join-Path $Fresh "docs/patterns/document-lifecycle.md")
+    if (!$FreshLifecycle.Contains("Superseded by")) { throw "lifecycle supersede rule missing" }
+    $FreshPlansReadme = Get-Content -Raw (Join-Path $Fresh "docs/plans/README.md")
+    if (!$FreshPlansReadme.Contains("docs/patterns/document-lifecycle.md")) { throw "plans README does not route to lifecycle pattern" }
     if (!(Test-Path (Join-Path $Fresh ".agents/skills/encode-invariant/SKILL.md"))) { throw "encode-invariant skill missing" }
     $FreshAgents = Get-Content -Raw (Join-Path $Fresh "AGENTS.md")
     if (!$FreshAgents.Contains("docs/patterns/encoding-invariants.md")) { throw "invariant routing missing" }

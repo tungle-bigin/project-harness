@@ -21,11 +21,13 @@ Use an ephemeral plan for bounded work. Create one plan in
 `docs/plans/active/` when work spans sessions, coordinates contributors, has
 meaningful dependencies, needs recovery, or cannot safely resume from its diff.
 
-Use `docs/templates/exec-plan.md`: one file holding Spec (outcome, context,
-scope), Clarify (open questions), Plan (tech stack and architecture), Tasks,
-and Analyze (a pre-validation consistency check) as sections, not separate
-records. Keep progress and task-local decisions in the same file; avoid
-parallel task records without an independent audience.
+Default to `docs/templates/exec-plan.md`: one file where Outcome and Scope are
+the Spec, Approach is the Plan, and Progress holds the Tasks, beside Clarify
+and Analyze sections. Use `docs/templates/split-plan/` (spec, design,
+tasks) only when a separate audience approves the spec, contributors own design
+and tasks separately, or recovery cost is high. Either shape is one plan. The
+[document lifecycle](patterns/document-lifecycle.md) says which documents track
+code, stay frozen, or stay current while active.
 
 ### Does The Work Need Human Judgment?
 
@@ -93,16 +95,15 @@ No parallel lifecycle record is required.
 
 ### Durable Planned Change
 
-Create or resume one active plan using `docs/templates/exec-plan.md`. Keep
-Spec, Clarify, Plan, Risks and Recovery, Tasks, Analyze, Decisions, and
-Validation current in that one file. Resolve every Clarify question (or
-explicitly stop on it) before writing Plan; run the Analyze check before
-Validation and before marking a Task complete. Implement in verifiable groups,
-promote lasting decisions, run focused and repository proof, then record the
-result and move the plan to `docs/plans/completed/`.
+Create or resume one active plan in the chosen shape. Keep Spec, Clarify,
+Plan, Risks and Recovery, Tasks, Analyze, Decisions, and Validation current in
+it. Resolve every Clarify question (or explicitly stop on it) before writing
+Plan; run the Analyze check before Validation and before marking a Task
+complete. Implement in verifiable groups, promote lasting behavior into Truth
+documents and lasting choices into decisions, run focused and repository proof,
+then record the result and move the plan to `docs/plans/completed/`.
 
-No parallel lifecycle record is required: Spec, Clarify, Plan, Tasks, and
-Analyze are sections of the same file, not separate records.
+No parallel lifecycle record is required.
 
 ### Operate The Application
 

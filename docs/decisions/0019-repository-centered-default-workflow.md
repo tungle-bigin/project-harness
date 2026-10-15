@@ -4,7 +4,7 @@ Date: 2026-07-21
 
 ## Status
 
-Accepted and active.
+Accepted and active. Item 5 amended by decision 0029 (split plans).
 
 ## Context
 

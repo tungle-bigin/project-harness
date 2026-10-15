@@ -22,6 +22,7 @@ current_files=(
   docs/HARNESS.md
   docs/README.md
   docs/patterns/encoding-invariants.md
+  docs/patterns/document-lifecycle.md
   docs/product/README.md
   docs/product/installation-profiles.md
   docs/plans/README.md
@@ -32,6 +33,9 @@ current_files=(
   docs/templates/decision.md
   docs/templates/exec-plan.md
   docs/templates/harness-improvement.md
+  docs/templates/split-plan/spec.md
+  docs/templates/split-plan/design.md
+  docs/templates/split-plan/tasks.md
   docs/decisions/0019-repository-centered-default-workflow.md
   docs/decisions/0020-installation-profile-and-knowledge-boundaries.md
   docs/decisions/0024-rust-harness-core-maintenance-cli.md
@@ -39,6 +43,7 @@ current_files=(
   docs/decisions/0026-explicit-onboarding-skills-in-default-core.md
   docs/decisions/0027-end-protocol-v1-and-focus-repository-protocol.md
   docs/decisions/0028-authoritative-invariant-encoding.md
+  docs/decisions/0029-document-lifecycle-and-split-plans.md
   docs/research/application-legibility.md
   .github/ISSUE_TEMPLATE/real-world-example.md
 )
@@ -66,6 +71,33 @@ require docs/patterns/encoding-invariants.md '| Optional hook |'
 require docs/patterns/encoding-invariants.md '| CI |'
 require docs/patterns/encoding-invariants.md '| Branch protection |'
 require docs/decisions/0028-authoritative-invariant-encoding.md 'Matching requests may invoke it implicitly'
+require docs/decisions/0029-document-lifecycle-and-split-plans.md 'Amends decision 0019 item 5'
+require docs/WORKFLOW.md '(patterns/document-lifecycle.md)'
+require docs/WORKFLOW.md 'Either shape is one plan.'
+for heading in '## 1. Classify Every Location' '## 2. Resolve Drift' '## 3. Choose The Plan Shape' '## 4. Name And Order Plans' '## 5. Promote On Completion' '## 6. Checks Worth Encoding'; do
+  require docs/patterns/document-lifecycle.md "$heading"
+done
+require docs/patterns/document-lifecycle.md 'Harness ships no validator'
+require docs/patterns/document-lifecycle.md 'Depends on: <other plan name>'
+require docs/templates/exec-plan.md 'Depends on:'
+require docs/templates/exec-plan.md 'Promoted to Truth documents:'
+require docs/decisions/0019-repository-centered-default-workflow.md 'amended by decision 0029'
+require docs/templates/split-plan/tasks.md 'Promoted to Truth documents:'
+require docs/templates/split-plan/spec.md '## Clarify'
+require docs/templates/split-plan/tasks.md '## Analyze'
+require docs/templates/split-plan/tasks.md 'Depends on:'
+for part in spec design; do
+  ! rg -Fq 'Depends on:' "$root/docs/templates/split-plan/$part.md" ||
+    fail "split-plan $part repeats Depends on; it belongs only in tasks.md"
+done
+for part in spec design tasks; do
+  require "docs/templates/split-plan/$part.md" 'Plan: YYYY-MM-DD-<slug>'
+  require "docs/templates/split-plan/$part.md" "Part: $part"
+  require "docs/templates/split-plan/$part.md" 'Siblings: ['
+done
+require docs/patterns/document-lifecycle.md '<part>: not applicable (reason)'
+[[ ! -e "$root/docs/templates/high-risk-story" ]] || fail 'high-risk-story templates were replaced by split-plan'
+! rg -Fq 'Do not split one task into story' "$root/docs/plans/README.md" || fail 'plans README still forbids split plans'
 require docs/ARCHITECTURE.md 'one Rust binary'
 require README.md '## What We Prove'
 require README.md '## Protocol V1 End Of Life'
@@ -74,7 +106,7 @@ require docs/decisions/0027-end-protocol-v1-and-focus-repository-protocol.md '`h
 require .github/ISSUE_TEMPLATE/real-world-example.md '`docs/WORKFLOW.md`'
 require .github/ISSUE_TEMPLATE/real-world-example.md '`docs/ARCHITECTURE.md`'
 
-for heading in Outcome Context Scope Approach 'Risks And Recovery' Progress Decisions Validation Result; do
+for heading in Outcome Context Scope Clarify Approach 'Risks And Recovery' Progress Decisions Analyze Validation Result; do
   require docs/templates/exec-plan.md "## $heading"
 done
 

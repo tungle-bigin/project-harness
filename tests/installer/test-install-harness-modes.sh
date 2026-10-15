@@ -48,6 +48,18 @@ grep -Fq 'docs/patterns/encoding-invariants.md' "$fresh/AGENTS.md"
 grep -Fq 'Does The Work Encode An Invariant?' "$fresh/docs/WORKFLOW.md"
 grep -Fq 'Positive proof' "$fresh/docs/patterns/encoding-invariants.md"
 grep -Fq 'Negative proof' "$fresh/docs/patterns/encoding-invariants.md"
+[[ -f "$fresh/docs/patterns/document-lifecycle.md" ]]
+for part in spec design tasks; do
+  [[ -f "$fresh/docs/templates/split-plan/$part.md" ]]
+done
+[[ ! -e "$fresh/docs/templates/high-risk-story" ]]
+grep -Fq 'Superseded by' "$fresh/docs/patterns/document-lifecycle.md"
+# Installed guidance must not cite upstream decision IDs a consumer does not have.
+if grep -rniE '(decision|superseded by)[^0-9]{0,4}00[0-9]{2}' "$fresh/AGENTS.md" "$fresh/docs"; then
+  echo 'installed guidance cites an upstream decision ID' >&2
+  exit 1
+fi
+grep -Fq 'docs/patterns/document-lifecycle.md' "$fresh/docs/plans/README.md"
 grep -Fq 'prevent a documented violation from recurring' \
   "$fresh/.agents/skills/encode-invariant/SKILL.md"
 grep -Fq "Reuse the repository's existing test, build, task, lint, scan, or validation" \
