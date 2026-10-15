@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-10-15 - PR #1
+
+- feat(harness): add document lifecycle pattern and split-plan templates (@tungle-bigin)
+- Merge commit: `edee3c48e87796e987a93861a3905609eb89bebb`
+- Harness core candidate: `harness-v0.1.11` (publication requires platform proof)
+- Changed files: 29 total (first 20 shown)
+  - `AGENTS.md`
+  - `crates/harness/assets/docs/decisions/README.md`
+  - `crates/harness/assets/docs/plans/README.md`
+  - `crates/harness/src/infrastructure/embedded_distribution.rs`
+  - `docs/README.md`
+  - `docs/WORKFLOW.md`
+  - `docs/decisions/0019-repository-centered-default-workflow.md`
+  - `docs/decisions/0029-document-lifecycle-and-split-plans.md`
+  - `docs/decisions/README.md`
+  - `docs/patterns/document-lifecycle.md`
+  - `docs/plans/README.md`
+  - `docs/plans/active/README.md`
+  - `docs/plans/completed/2026-10-14-document-lifecycle.md`
+  - `docs/templates/exec-plan.md`
+  - `docs/templates/high-risk-story/design.md`
+  - `docs/templates/high-risk-story/execplan.md`
+  - `docs/templates/high-risk-story/overview.md`
+  - `docs/templates/high-risk-story/validation.md`
+  - `docs/templates/split-plan/design.md`
+  - `docs/templates/split-plan/spec.md`
+  - _… 9 additional file(s) omitted from this entry._
+
 ## 2026-08-13 - PR #66
 
 - fix(installer): reject unknown PowerShell parameters (@hoangnb24)
